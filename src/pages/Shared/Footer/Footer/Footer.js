@@ -16,6 +16,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 const Footer = () => {
     const footerStyle = {
         backgroundColor: "gray",
+        marginTop: '20px'
 
 
 

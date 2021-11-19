@@ -1,6 +1,7 @@
 import { Button, Grid, Typography } from '@mui/material';
 import { height, width } from '@mui/system';
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import bg from '../../../images/homeBanner.jpg'
 
 const HomeBanner = () => {
@@ -22,7 +23,7 @@ const HomeBanner = () => {
                 <Grid sx={{ textAlign: "left", mt: 2, ml: 5 }} item xs={12} md={6}>
                     <Typography sx={{ my: 5, color: "DarkBlue", fontWeight: 'bold' }} variant="h2">Find Your Dream Car Here</Typography>
                     <Typography sx={{ my: 5, color: "Crimson", fontWeight: 'bold' }} variant="h2">Your Car Shop</Typography>
-                    <Button sx={{ fontSize: '15px' }} variant="contained">Explore More</Button>
+                    <NavLink style={{ textDecoration: 'none' }} to="/explore"><Button sx={{ fontSize: '15px' }} variant="contained">Explore More</Button></NavLink>
 
 
                 </Grid>
