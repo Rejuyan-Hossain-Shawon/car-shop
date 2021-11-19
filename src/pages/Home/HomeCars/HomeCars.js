@@ -6,7 +6,7 @@ import CarDisplay from '../../Shared/CarDisplay/CarDisplay';
 const HomeCars = () => {
     const [cars, setCars] = useState([]);
     useEffect(() => {
-        fetch("http://localhost:5000/cars")
+        fetch("https://enigmatic-shelf-59046.herokuapp.com/cars")
             .then(res => res.json())
             .then(data => {
                 const shortedData = data.slice(0, 6)

@@ -28,18 +28,18 @@ function App() {
             <Route path="/login">
               <Login />
             </Route>
-            <Route path="/purchase/:_id">
+            <PrivateRoute path="/purchase/:_id">
               <Purchase></Purchase>
-            </Route>
+            </PrivateRoute>
             <Route path="/register">
               <Registration></Registration>
             </Route>
             <Route path="/explore">
               <ExploreMore></ExploreMore>
             </Route>
-            <Route path="/dashboard">
+            <PrivateRoute path="/dashboard">
               <Dashboard />
-            </Route>
+            </PrivateRoute>
           </Switch>
         </Router>
       </AuthProvider>

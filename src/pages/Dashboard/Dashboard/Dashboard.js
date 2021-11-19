@@ -22,10 +22,19 @@ import DashboardHome from '../DashboardHome/DashboardHome';
 import Payment from '../Payment/Payment';
 import MyOrder from '../MyOrder/MyOrder';
 import Review from '../Review/Review';
+import ManageAllOrder from '../ManageAllOrder/ManageAllOrder';
+import AddAProduct from '../AddAProduct/AddAProduct';
+import ManageProduct from '../ManageProduct/ManageProduct';
+import MakeAnAdmin from './MakeAnAdmin/MakeAnAdmin';
+import PrivateRoute from '../../PrivateRoute/PrivateRoute';
+import useAuth from '../../../hooks/useAuth';
+import AdminRoute from '../../AdminRoute/AdminRoute';
 
 const drawerWidth = 240;
 
 const Dashboard = (props) => {
+    const { user, admin, logout } = useAuth();
+
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -42,10 +51,20 @@ const Dashboard = (props) => {
             <Box>
                 <Link to={`${url}`}><Button color="inherit">Dashboard</Button></Link><br />
                 <Link to="/"><Button color="inherit">Home</Button></Link><br />
-                <Link to={`${url}/payment`}><Button sx={{ mt: 1 }} color="inherit">Payment</Button></Link><br />
-                <Link to={`${url}/myorders`}><Button sx={{ mt: 1 }} color="inherit">My Orders</Button></Link><br />
-                <Link to={`${url}/review`}><Button sx={{ mt: 1 }} color="inherit">Review</Button></Link><br />
-                <Button variant="contained" sx={{ my: 1 }} color="error">Logout</Button>
+                {
+                    !admin && <Box><Link to={`${url}/payment`}><Button sx={{ mt: 1 }} color="inherit">Payment</Button></Link><br />
+                        <Link to={`${url}/myorders`}><Button sx={{ mt: 1 }} color="inherit">My Orders</Button></Link><br />
+                        <Link to={`${url}/review`}><Button sx={{ mt: 1 }} color="inherit">Review</Button></Link><br /></Box>
+                }
+                {
+                    admin && <Box>
+                        <Link to={`${url}/manageallorder`}><Button sx={{ mt: 1 }} color="inherit">Manage All Order</Button></Link><br />
+                        <Link to={`${url}/addaproduct`}><Button sx={{ mt: 1 }} color="inherit">Add a Product</Button></Link><br />
+                        <Link to={`${url}/makeanadmin`}><Button sx={{ mt: 1 }} color="inherit">Make an Admin</Button></Link><br />
+                        <Link to={`${url}/manageproduct`}><Button sx={{ mt: 1 }} color="inherit">Manage Products</Button></Link><br />
+                    </Box>
+                }
+                <Button onClick={logout} variant="contained" sx={{ my: 1 }} color="error">Logout</Button>
             </Box>
 
             <Divider />
@@ -129,12 +148,19 @@ const Dashboard = (props) => {
                     <Route path={`${path}/review`}>
                         <Review></Review>
                     </Route>
-                    {/* <AdminRoute path={`${path}/makeAdmin`}>
-                        <MakeAdmin></MakeAdmin>
+                    <AdminRoute path={`${path}/manageallorder`}>
+                        <ManageAllOrder></ManageAllOrder>
                     </AdminRoute>
-                    <AdminRoute path={`${path}/addDoctor`}>
-                        <AddDoctor></AddDoctor>
-                    </AdminRoute> */}
+                    <AdminRoute path={`${path}/addaproduct`}>
+                        <AddAProduct></AddAProduct>
+                    </AdminRoute>
+                    <AdminRoute path={`${path}/manageproduct`}>
+                        <ManageProduct></ManageProduct>
+                    </AdminRoute>
+                    <AdminRoute path={`${path}/makeanadmin`}>
+                        <MakeAnAdmin></MakeAnAdmin>
+                    </AdminRoute>
+
                 </Switch>
 
             </Box>

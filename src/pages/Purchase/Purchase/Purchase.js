@@ -12,7 +12,7 @@ const Purchase = () => {
     const [success, setSuccess] = useState(false)
 
     useEffect(() => {
-        fetch(`http://localhost:5000/cars/${_id}`)
+        fetch(`https://enigmatic-shelf-59046.herokuapp.com/cars/${_id}`)
             .then(res => res.json())
             .then(data => setCar(data))
     }, [])
@@ -22,7 +22,7 @@ const Purchase = () => {
     const onSubmit = (data, e) => {
         data.email = user.email;
         data.model = car.title;
-        fetch("http://localhost:5000/orders", {
+        fetch("https://enigmatic-shelf-59046.herokuapp.com/orders", {
             method: "POST",
             headers: {
                 'content-type': "application/json"

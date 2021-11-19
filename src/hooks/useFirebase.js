@@ -8,6 +8,7 @@ const useFirebase = () => {
     const [user, setUser] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const [authError, setAuthError] = useState("");
+    const [admin, setAdmin] = useState(false);
     const auth = getAuth();
 
     const googleProvider = new GoogleAuthProvider();
@@ -44,6 +45,14 @@ const useFirebase = () => {
             .finally(() => setIsLoading(false));
     }
 
+    // admin verify normally
+    useEffect(() => {
+        fetch(`https://enigmatic-shelf-59046.herokuapp.com/user/${user.email}`)
+            .then(res => res.json())
+            .then(data => setAdmin(data.admin))
+    }, [user.email])
+
+
     // logout
     const logout = () => {
         signOut(auth).then(() => {
@@ -62,6 +71,7 @@ const useFirebase = () => {
 
                 setAuthError('');
                 alert('register success')
+                saveUser(email, name);
 
                 history.replace("/");
             })
@@ -93,8 +103,24 @@ const useFirebase = () => {
             .finally(() => setIsLoading(false));
     }
 
+    // save user in database  
+
+    const saveUser = (email, displayName) => {
+        const user = { email, displayName };
+        console.log("firebase console", user);
+        fetch("https://enigmatic-shelf-59046.herokuapp.com/user", {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then()
+    }
+
     return {
         user,
+        admin,
         authError,
         isLoading,
         signInWithGoogle,

@@ -19,6 +19,7 @@ const Registration = () => {
         }
         else {
             registerUser(data.email, data.password1, data.name);
+            history.push("/");
             e.target.reset();
         }
     };

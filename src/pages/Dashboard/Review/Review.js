@@ -3,14 +3,19 @@
 import { Alert, AlertTitle } from '@mui/material';
 import React, { useState } from 'react';
 import { Controller, useForm, Reset } from 'react-hook-form';
+import useAuth from '../../../hooks/useAuth';
 
 const Review = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const [success, setSuccess] = useState(false);
+    const { user } = useAuth();
+
     const onSubmit = (data, e) => {
         const review = document.getElementById("reviewComment").value;
         data.review = review;
-        fetch('http://localhost:5000/reviews', {
+        data.name = user.displayName;
+        data.email = user.email;
+        fetch('https://enigmatic-shelf-59046.herokuapp.com/reviews', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
